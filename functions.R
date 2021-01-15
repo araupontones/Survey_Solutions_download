@@ -224,6 +224,9 @@ ss_export2 = function(sserver,
                              encode = "json"
     )
     
+    Sys.sleep(3)
+    
+    
     #get the links of all files generated in the system
     Myjson <- tempfile(fileext = ".json")
     

@@ -1,6 +1,13 @@
-## Downloads data from muvapob.com and stores its raw version in the C drive
-source("set_up.R")
-source("functions.R")
+## Downloads data from pulpodata.solutions and stores its raw version in the define download and raw folders
+
+#define path where the R project is located
+if(Sys.getenv("USERNAME")=="andre"){
+  dir_project = "C:/repositaries/Survey_Solutions_download"
+}
+
+#define your paths in the set_up.R
+  source(file.path(dir_project,"set_up.R"))
+  source(file.path(dir_project,"functions.R"))
 
 
 
@@ -8,7 +15,7 @@ source("functions.R")
 
 ##' get details of all questionnaires (ID, variable name, etc.)
 
-Questionnaires_details = SS_getQnsDetails(sserver = sserver, sspassword = "Seguridad1", ssuser = "araupontones")
+Questionnaires_details = SS_getQnsDetails(sserver = sserver, sspassword = sspassword, ssuser = ssuser)
 
 
 
