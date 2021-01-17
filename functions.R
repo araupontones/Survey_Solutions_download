@@ -329,7 +329,7 @@ ss_append <- function(downloadDir, rawDir, ...) {
   
   #' questionnaires with at least one row
   list_files = list_files[lengths(list_files) != 0]
-  questionnaires  = unique(str_extract(names(list_files), "(?<=[0-9]\\/).*"))
+  questionnaires  = unique(str_extract(names(list_files), "([^\\/]+$)"))
   
   
   #'create raw directory in case it does not exists
