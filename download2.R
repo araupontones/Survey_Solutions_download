@@ -28,7 +28,8 @@ for(script in scripts){
  ss_credentials(ssuser = "araupontones",
                 sspassword = "Seguridad1",
                 sserver = "http://www.pulpodata.solutions",
-                dir_ss_downloads = dir_ss_downloads)
+                dir_ss_downloads = dir_ss_downloads,
+                dir_ss_raw = dir_raw)
 
 # get details of all the questionnaires imported in the server ----------------
 
@@ -52,13 +53,23 @@ for(script in scripts){
     
 
 # export file 
+ 
     
+  ss_export_file(qn_variable= "elp_classroom",
+                 qn_version =  ss_questionnaires$Version[ss_questionnaires$Variable == "elp_classroom"],
+                 ex_format = "STATA",
+                 interview_status = "All"
+                 
+  )
+  
     ss_export_file(qn_variable= "elp_pupil",
-                              qn_version = c(3),
+                              qn_version = ss_questionnaires$Version[ss_questionnaires$Variable == "elp_pupil"],
                               ex_format = "STATA",
                               interview_status = "All"
                               
     )
                               
     
+    ##append
+    ss_append()
     

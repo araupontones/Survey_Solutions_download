@@ -8,10 +8,11 @@
 ss_credentials = function(ssuser,
          sspassword,
          sserver,
-         dir_ss_downloads){
+         dir_ss_downloads,
+         dir_ss_raw){
   
- names = c("ssuser", "sserver", "sspassword", "dir_ss_downloads")
- values = c(ssuser,sserver, sspassword, dir_ss_downloads)
+ names = c("ssuser", "sserver", "sspassword", "dir_ss_downloads", "dir_ss_raw")
+ values = c(ssuser,sserver, sspassword, dir_ss_downloads, dir_ss_raw)
  
  #save parameters in global directory
  lapply(seq_along(1:length(names)),
