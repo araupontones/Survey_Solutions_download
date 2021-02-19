@@ -51,6 +51,7 @@
                  
   )
   
+
     ss_export_file(qn_variable= "elp_principal",
                               qn_version = 6,
                               ex_format = "stata",
