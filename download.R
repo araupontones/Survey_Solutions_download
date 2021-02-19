@@ -1,76 +1,66 @@
-## Downloads data from pulpodata.solutions and stores its raw version in the define download and raw folders
 
-#define path where the R project is located
-if(Sys.getenv("USERNAME")=="andre"){
-  dir_project = "C:/repositaries/Survey_Solutions_download"
-}
+##Set paths
 
-#define your paths in the set_up.R
-  source(file.path(dir_project,"set_up.R"))
-  source(file.path(dir_project,"functions.R"))
+  
+    dir_functions ="R"  #folder where the R scripts are located
+    survey_dir = "C:/Users/andre/Dropbox/SS" ## directory of the survey
+    dir_ss_downloads = file.path(survey_dir, "downloads") ## directory to download the data
+    dir_raw = file.path(survey_dir, "raw") ## directory to store the raw data
 
 
+    survey_so_user = "araupontones"
+    survey_so_pass = "Seguridad1"
+    surve_so_server =  "http://www.pulpodata.solutions"
 
 
-
-##' get details of all questionnaires (ID, variable name, etc.)
-
-Questionnaires_details = SS_getQnsDetails(sserver = sserver, sspassword = sspassword, ssuser = ssuser)
-
-
-
-
-
-#unlink(file.path(dir_ss_downloads, "tracking_3"), recursive = T)
-#unlink(file.path(dir_ss_downloads, "tracking_5"), recursive = T)
-
-
-##Export principal versions 2
-
-ss_export2(sserver = sserver,
-          questionnaires = Questionnaires_details,
-          ex_format = "STATA",
-          qn_variable = "elp_principal",
-          qn_version = c(2),
-          ssuser = ssuser,
-          sspassword = sspassword,
-          temporary_dir = temporDir,
-          exdir = dir_ss_downloads,
-          interview_status = "All"
-          )
-
-##Export principal versions 2
-
-ss_export2(sserver = sserver,
-           questionnaires = Questionnaires_details,
-           ex_format = "STATA",
-           qn_variable = "elp_teacher",
-           qn_version = c(2),
-           ssuser = ssuser,
-           sspassword = sspassword,
-           temporary_dir = temporDir,
-           exdir = dir_ss_downloads,
-           interview_status = "All"
-)
+    
+#load scripts - this runs the functions to download the data (No Action needed) --------------------------------------------------------------
+    source(file.path(dir_project,"set_up.R"))
+    scripts = list.files(dir_functions, recursive = T)
+    
+    message("Loading the following functions")
+    for(script in scripts){
+      
+      message(script)
+      source(file.path(dir_functions, script))
+    }
+    
+    
 
 
-# export pupil versions 2
-ss_export2(sserver = sserver,
-           questionnaires = Questionnaires_details,
-           ex_format = "STATA",
-           qn_variable = "elp_pupil",
-           qn_version = c(2),
-           ssuser = ssuser,
-           sspassword = sspassword,
-           temporary_dir = temporDir,
-           exdir = dir_ss_downloads,
-           interview_status = "All"
-)
+# Define credentials- (No action needed) ----------------------------------------------------------
+
+ ss_credentials(ssuser = survey_so_user,
+                sspassword =  survey_so_pass,
+                sserver = surve_so_server ,
+                dir_ss_downloads = dir_ss_downloads, 
+                dir_ss_raw = dir_raw)
 
 
+# get details of all the questionnaires imported in the server ----------------
+
+  SS_getQnsDetails() #this functions saves ss_questionnaires in  the global environment
 
 
-
-
-##Append versions
-ss_append(downloadDir = dir_ss_downloads, rawDir = dir_raw)
+#export interviews (ACTION: define the parameters of your query, each query must be called by it self)
+    
+  ss_export_file(qn_variable= "elp_classroom",
+                 qn_version = 6,
+                 ex_format = "stata",
+                 interview_status = "All"
+                 
+  )
+  
+    ss_export_file(qn_variable= "elp_principal",
+                              qn_version = 6,
+                              ex_format = "stata",
+                              interview_status = "All"
+                              
+    )
+                              
+    
+##append and save in raw folder -----------------------------------------------------------------------
+    ss_append()
+    
+    
+    
