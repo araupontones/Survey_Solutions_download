@@ -1,10 +1,15 @@
     
+library(httr)
+
+
 
 #'Define Server credentials
 #' @param  ssuser User of ss
 #' @param sspassword Password API
 #' @param server Server of ss
 #' 
+#' 
+
 ss_credentials = function(ssuser,
          sspassword,
          sserver,

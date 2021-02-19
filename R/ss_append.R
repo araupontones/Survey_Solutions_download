@@ -1,3 +1,5 @@
+library(rio)
+
 #' FUNCTION TO APPEND DIFFERENT VERSIONS OF QUESTIONNAIRE AND SAVE IN RAW FOLDER
 #' @param dir_ss_downloads Directory where data is downloaded from survey solutions
 #' @param dir_ss_raw Directory where data will be appended   
